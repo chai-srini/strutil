@@ -25,3 +25,23 @@ func TestSubStrings(t *testing.T) {
 		})
 	}
 }
+
+func TestSubStringsMap(t *testing.T) {
+	tests := []struct {
+		name string
+		arg  string
+		want map[int][]string
+	}{
+		{"Basic 3 char str", "abc", map[int][]string{1: {"a", "b", "c"}, 2: {"ab", "bc"}}},
+		{"Empty", "", map[int][]string{}},
+		{"Single char", "a", map[int][]string{}},
+		{"two chars", "ab", map[int][]string{1: {"a", "b"}}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := SubStringsMap(tt.arg); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("SubStringsMap() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
